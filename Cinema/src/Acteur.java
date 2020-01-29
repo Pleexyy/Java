@@ -4,14 +4,33 @@ public class Acteur {
 	private int anneeNaiss;
 	private String nationalite;
 	private Film leFilm;
+	private Film lesFilms[];
+	private int nbFilms;
 	
 	// Constructeur par défaut
 	
-	public Acteur(String unNom, String unPrenom, int uneAnneeNaiss, String uneNationalite) {
+	public Acteur() {
+		this.nbFilms = 0;
+		this.lesFilms = new Film[10];
+	}
+	
+	public Acteur(String unNom, String unPrenom, int uneAnneeNaiss, String uneNationalite,
+			Film lesFilms[]) {
+		this.nbFilms = 0;
 		this.nom = unNom;
 		this.prenom = unPrenom;
 		this.anneeNaiss = uneAnneeNaiss;
 		this.nationalite = uneNationalite;
+		this.lesFilms = new Film[10];
+	}
+	
+	public Acteur(String unNom, String unPrenom, int uneAnneeNaiss, String uneNationalite) {
+		this.nbFilms = 0;
+		this.nom = unNom;
+		this.prenom = unPrenom;
+		this.anneeNaiss = uneAnneeNaiss;
+		this.nationalite = uneNationalite;
+		this.lesFilms = new Film[10];
 	}
 	
 	// getter
@@ -32,24 +51,48 @@ public class Acteur {
 		return this.nationalite;
 	}
 	
+	public boolean rechercherFilm(String titre) {
+		int i = 0;
+		boolean flag = false;
+		while (i < nbFilms && !titre.equals(this.lesFilms[i].getTitre())) {
+			i++;
+		}
+		if (i < nbFilms) {
+			flag = true;
+		} 
+	return flag;
+	}
+	
+//	public boolean rechercherFilm(String titre) { DONNER POSITION DE L'INDEX OU SE TROUVE LE FILM
+//		int i = 0;
+//		boolean flag = false;
+//		while (i < nbFilms && !titre.equals(this.lesFilms[i].getTitre())) {
+//			i++;
+//		}
+//		if (i < nbFilms) {
+//			flag = true;
+//		} 
+//	return flag;
+//	}
+	
+//	public boolean supprimer(String titre) {
+//		return
+//	}
+	
+
 	public Film getUnFilm() {
 		return this.leFilm;
 	}
-	
-//	private String makeLogin() {
-//		String res = this.prenom.substring(0, 1) + this.nom;
-//		return res.toLowerCase();
-//	}
 	
 	public String toString() {
 		String chaine = "[-----Acteur-----]\nNom : " + this.nom + 
 						"\nPrénom : " + this.prenom + 
 						"\nAnnée de naissance : " + this.anneeNaiss;
 		if(this.nationalite != null) {
-			chaine += "\nNationalité : " + this.nationalite + "\n";
+			chaine += "\n Catégorie : " + this.nationalite + "\n";
 		}
-		if(this.leFilm != null) {
-			chaine += "\nFilm : " + this.leFilm.versChaine();
+		for(int i = 0; i < nbFilms; i++) {
+			chaine += "\nFilm : " + this.lesFilms[i].versChaine();
 		}
 		chaine += "\n";
 		return chaine;
@@ -73,9 +116,13 @@ public class Acteur {
 		this.nationalite = uneNationalite;
 	}
 
-	public void setLeFilm(Film unFilm) {
-		this.leFilm = unFilm;
-	}
+//	public void setLeFilm(Film unFilm) {
+//		this.leFilm = unFilm;
+//	}
 	
+	public void ajouterLesFilms(Film unFilm) {
+		this.lesFilms[nbFilms] = unFilm;
+		nbFilms++;
+	}
 	
 }

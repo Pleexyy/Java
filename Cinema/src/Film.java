@@ -4,6 +4,10 @@ public class Film {
 	private int duree;
 	private String genre;
 	
+	public Film() {
+		
+	}
+	
 	public Film(String unTitre, int uneAnneeSortie, int uneDuree, String unGenre) {
 		this.titre = unTitre;
 		this.anneeSortie = uneAnneeSortie;
@@ -25,6 +29,10 @@ public class Film {
 		}
 		chaine += "\n";
 		return chaine;
+	}
+	
+	public String getTitre() {
+		return this.titre;
 	}
 	
 }
