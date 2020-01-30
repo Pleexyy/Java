@@ -18,5 +18,6 @@ public class Main {
 		System.out.println(unActeur.toString());
 		
 		System.out.println(unActeur.rechercherFilm("Intouchables"));
+		System.out.println(unActeur.rechercherIndex("Vermillon"));
 	}
 }

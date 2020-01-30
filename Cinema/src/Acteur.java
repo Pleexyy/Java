@@ -63,21 +63,35 @@ public class Acteur {
 	return flag;
 	}
 	
-//	public boolean rechercherFilm(String titre) { DONNER POSITION DE L'INDEX OU SE TROUVE LE FILM
-//		int i = 0;
-//		boolean flag = false;
-//		while (i < nbFilms && !titre.equals(this.lesFilms[i].getTitre())) {
-//			i++;
-//		}
-//		if (i < nbFilms) {
-//			flag = true;
-//		} 
-//	return flag;
-//	}
+	public int rechercherIndex(String titre) {
+			int i = 0;
+			while (i < nbFilms && !titre.equals(this.lesFilms[i].getTitre())) {
+				i++;
+			}
+			if (i >= nbFilms) {
+				System.out.println("Film introuvable, aucun index trouvé");
+			} 
+		return i;
+		}
 	
-//	public boolean supprimer(String titre) {
-//		return
-//	}
+	public String supprimer(String titre) {
+		int temp = 0;
+		int index = 0;
+		if (index > nbFilms) {
+			System.out.println("Aucun élèment à supprimer");
+		}
+		for (int i = 0; i < nbFilms -1; i++) {
+            if (i < index) {
+            	lesFilms[i]=lesFilms[i+1];
+            }
+            else if (i == index) {
+            	lesFilms[i]=lesFilms[i+1];
+            } else {
+            	lesFilms[i]=lesFilms[i+1];
+            }
+        }
+		return ;
+	}
 	
 
 	public Film getUnFilm() {
