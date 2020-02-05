@@ -65,32 +65,32 @@ public class Acteur {
 	
 	public int rechercherIndex(String titre) {
 			int i = 0;
+			int index = 0;
 			while (i < nbFilms && !titre.equals(this.lesFilms[i].getTitre())) {
 				i++;
+				index++;
 			}
 			if (i >= nbFilms) {
-				System.out.println("Film introuvable, aucun index trouvé");
+				index = -1;
 			} 
-		return i;
+		return index;
 		}
 	
 	public String supprimer(String titre) {
-		int temp = 0;
-		int index = 0;
-		if (index > nbFilms) {
-			System.out.println("Aucun élèment à supprimer");
+		int rep = 0;
+		
+		if (i > nbFilms) {
+			rep = -1;
+		} else {
+			for (int x = i; x < nbFilms; x++) {
+				this.lesFilms[x] = this.lesFilms[x + 1];
+			}
+			
 		}
-		for (int i = 0; i < nbFilms -1; i++) {
-            if (i < index) {
-            	lesFilms[i]=lesFilms[i+1];
-            }
-            else if (i == index) {
-            	lesFilms[i]=lesFilms[i+1];
-            } else {
-            	lesFilms[i]=lesFilms[i+1];
-            }
-        }
-		return ;
+		
+		return rep;
+		
+		
 	}
 	
 
