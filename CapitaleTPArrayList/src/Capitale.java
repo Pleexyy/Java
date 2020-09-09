@@ -1,16 +1,7 @@
-public class Capitale {
-    private String nom;
-    private int nbHabitants;
-    private String superficie;
+public class Capitale extends Ville {
 
     public Capitale(String unNom, int unNbHabitants, String uneSuperficie) {
-        this.nom = unNom;
-        this.nbHabitants = unNbHabitants;
-        this.superficie = uneSuperficie;
-    }
-    
-    public Capitale(String unNom) {
-        this.nom = unNom;
+    	super(unNom, unNbHabitants, uneSuperficie);
     }
     
     public String getNom2() {
