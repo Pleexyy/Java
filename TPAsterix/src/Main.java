@@ -1,9 +1,8 @@
 public class Main {
 	public static void main(String[] args) {
-		Modele unModele = new Modele();
 		Gui unGui = new Gui();
-		unModele.connecterBdd();
+		Modele.connecterBdd();
 		unGui.fenetre();
-		unModele.fermetureConnexions();
+		Modele.fermetureConnexions();
 	}
 }
