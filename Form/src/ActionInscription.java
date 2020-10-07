@@ -1,13 +1,13 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class ActionInscription extends JPanel {
-	private JMenuBar barre;
-	private JMenu menu;
-	private JMenuItem inscription, connexion;
+
 	private JTextField userText;
 	private JButton registerButton;
 	private JLabel userLabel, passwordLabel;
 	private JPasswordField passwordText;
+	
 	public ActionInscription() {
 
 		userLabel = new JLabel("Login");
@@ -29,6 +29,5 @@ public class ActionInscription extends JPanel {
 		registerButton = new JButton("S'inscrire");
 		registerButton.setBounds(10, 80, 150, 25);
 		this.add(registerButton);
-		setVisible(true);
 	}
 }
