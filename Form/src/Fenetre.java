@@ -14,85 +14,55 @@ public class Fenetre extends JFrame implements ActionListener {
 	private JMenuItem inscription, connexion;
 	private JPanel panel;
 //	private ActionConnexion pageConnexion;
+	private VueInscription pageInscription;
+	private VueConnexion pageConnexion;
 
 	
 	public Fenetre() {
 		
-		this.setSize(400, 200);
+		this.setSize(350, 200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
         // permet de centrer la frame au milieu de l'écran
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        
         barre = new JMenuBar();
         menu = new JMenu("Menu");
         inscription = new JMenuItem("Inscription");
         connexion = new JMenuItem("Connexion");
         
-        menu.add(connexion);
         menu.add(inscription);
+        menu.add(connexion);
         barre.add(menu);
         
 		panel = new JPanel();
 		panel.add(barre);
 		
-		
 		inscription.addActionListener(new ActionInscription());
-//		connexion.addActionListener(new ActionConnexion());
+		connexion.addActionListener(new ActionConnexion());
 		
 		this.getContentPane().add(panel);
 		
 		this.setJMenuBar(barre);
 		this.setVisible(true);
 	}
-	
-	public void menuInscription() {
-		ActionInscription pageInscription =  new ActionInscription();
-		setContentPane(pageInscription);
-		revalidate();
-	}
-	
 
 	class ActionInscription implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			menuInscription();
+			pageInscription =  new VueInscription();
+			setContentPane(pageInscription);
+			revalidate();
 		}
 	}
 	
-//	class ActionInscription extends JPanel implements ActionListener {
-//		/**
-//		 * 
-//		 */
-//		private static final long serialVersionUID = 1L;
-//		public void actionPerformed(ActionEvent e) {
-//			if (e.getSource() == inscription) {
-//				System.out.println("inscription");
-//
-//				
-//				//		    if (e.getSource() == registerButton) {   	
-//				//		    	String textFieldValue = userText.getText();
-//				//		    	System.out.println(textFieldValue);
-//				//		    }
-//			}
-//		}
-//	}
-	
-//	class ActionConnexion extends JPanel implements ActionListener {
-//		/**
-//		 * 
-//		 */
-//		private static final long serialVersionUID = 1L;
-//		public void actionPerformed(ActionEvent e) {
-//			if(e.getSource() == connexion) {
-//				System.out.println("connexion");
-//				pageConnexion = new ActionConnexion();
-//				setContentPane(pageConnexion);
-//				setContentPane(panel);
-//				revalidate();
-//					
-//			}
-//		}
-//	}
+	class ActionConnexion implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			pageConnexion = new VueConnexion();
+			setContentPane(pageConnexion);
+			revalidate();
+		}
+	}
 	
 
 	@Override
