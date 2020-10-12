@@ -37,7 +37,7 @@ public class VueInscription extends JPanel implements ActionListener {
 	}
 
 	public void registered() {
-		registered = new JLabel("Inscription rÃ©ussie");
+		registered = new JLabel("Inscription réussie");
 		registered.setBounds(25, 80, 150, 25);
 		this.add(registered);
 		revalidate();

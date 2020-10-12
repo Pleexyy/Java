@@ -7,33 +7,33 @@ public class Database {
 
 	public static void connexionBdd() {
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			connexion = DriverManager
-					.getConnection("jdbc:mariadb://localhost:3306/utilisateurs?user=root&password=couleuvre");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2019bonneville?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","tbonneville","123456");
 			st = connexion.createStatement();
 		}
 
 		catch (SQLException e) {
-			System.err.println("Erreur de connexion Ã  la base de donnÃ©es " + e);
+			System.err.println("Erreur de connexion à la base de donnéees " + e);
 		} catch (ClassNotFoundException e) {
-			System.err.println("Driver non chargÃ© " + e);
+			System.err.println("Driver non chargé " + e);
 		}
 	}
 
 	public static void deconnexionBdd() {
 		try {
-			rs.close();
 			connexion.close();
 		} catch (SQLException e) {
-			System.err.println("Erreur lors de la dÃ©connexion " + e);
+			System.err.println("Erreur lors de la déconnexion " + e);
 		}
 	}
 
 	public static boolean inscription(String login, String pwd) {
 		boolean rep = false;
 		try {
-			rs = st.executeQuery("insert into utilisateurs (login, mdp) values ('" + login + "','" + pwd + "');");
+			connexionBdd();
+			st.executeUpdate("insert into utilisateurs (login, pwd) values ('" + login + "','" + pwd + "');");
 			rep = true;
+			deconnexionBdd();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -43,12 +43,14 @@ public class Database {
 	public static boolean connexion(String login, String pwd) {
 		boolean rep = false;
 		try {
-			rs = st.executeQuery(
-					"select login, mdp from utilisateurs where login = '" + login + "' and mdp = '" + pwd + "';");
+			connexionBdd();
+			rs = st.executeQuery("select login, pwd from utilisateurs where login = '" + login + "' and pwd = '" + pwd + "';");
 			if (rs.first()) {
 				String getLogin = rs.getString("login");
 				rep = true;
 			}
+			rs.close();
+			deconnexionBdd();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

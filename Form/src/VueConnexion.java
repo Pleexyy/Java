@@ -41,7 +41,7 @@ public class VueConnexion extends JPanel implements ActionListener {
 	}
 
 	public void connected() {
-		connected = new JLabel("Connexion rÃ©ussie");
+		connected = new JLabel("Connexion réussie");
 		connected.setBounds(10, 80, 150, 25);
 		this.add(connected);
 		revalidate();

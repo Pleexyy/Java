@@ -1,6 +1,6 @@
 public class Main {
 	public static void main(String[] args) {
-		Database.connexionBdd();
+//		Database.connexionBdd();
 		Window window = new Window();
 	}
 }
