@@ -25,23 +25,23 @@ public class VueConnexion extends JPanel implements ActionListener {
 		this.add(welcome);
 
 		userLabel = new JLabel("Login");
-		userLabel.setBounds(100, 200, 80, 25);
+		userLabel.setBounds(115, 200, 80, 25);
 		this.add(userLabel);
 
 		userText = new JTextField(20);
-		userText.setBounds(205, 200, 160, 25);
+		userText.setBounds(220, 200, 160, 25);
 		this.add(userText);
 
 		passwordLabel = new JLabel("Mot de passe");
-		passwordLabel.setBounds(100, 230, 100, 25);
+		passwordLabel.setBounds(115, 230, 100, 25);
 		this.add(passwordLabel);
 
 		passwordText = new JPasswordField(20);
-		passwordText.setBounds(205, 230, 160, 25);
+		passwordText.setBounds(220, 230, 160, 25);
 		this.add(passwordText);
 
 		loginButton = new JButton("Se connecter");
-		loginButton.setBounds(175, 270, 150, 25);
+		loginButton.setBounds(190, 270, 150, 25);
 		this.add(loginButton);
 
 		loginButton.addActionListener(this);

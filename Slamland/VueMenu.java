@@ -16,7 +16,7 @@ public class VueMenu extends JPanel implements ActionListener {
     public VueMenu(JFrame frame) {
         barre = new JMenuBar();
         menu = new JMenu("Menu");
-        attraction = new JMenuItem("Afficher les parcs d'attractions");
+        attraction = new JMenuItem("Afficher les attractions des parcs");
 
         attraction.addActionListener(new VueAttractions(frame));
 

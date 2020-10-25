@@ -1,39 +1,51 @@
-import javax.swing.*;
+import java.util.ArrayList;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.*;  
+public class Attraction {
 
-public class Attraction extends JPanel implements ActionListener {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    private String nom, ville;
+    private String nom, chaine;
+    private int capaciteMax, duree;
+    private float prix;
+    private ArrayList<Visiteur> lesVisiteurs;
 
-	public Attraction(String nom, String ville) {
-		this.nom = nom;
-		this.ville = ville;
-	}
-
-	public String getNom() {
-		return this.nom;
-	}
-
-	public String getVille() {
-		return this.ville;
+    public Attraction(String nom, int capaciteMax, int duree, float prix){
+        this.nom = nom;
+        this.capaciteMax = capaciteMax;
+        this.duree = duree;
+        this.prix = prix;
+    }
+    public Attraction(String nom, int capaciteMax, int duree, float prix, ArrayList <Visiteur> lesVisiteurs){
+        this.nom = nom;
+        this.capaciteMax = capaciteMax;
+        this.duree = duree;
+        this.prix = prix;
+        this.lesVisiteurs = lesVisiteurs;
     }
     
-    // public String toXML() {
-    //     // TextArea xml = new TextArea("TestXML");  
-    //     // this.add(xml);
-    //     String chaine = "";
-    //     chaine += 
+	// public String getNom() {
+    //     return this.nom;
     // }
 
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
+    // public int getCapaciteMax() {
+    //     return this.capaciteMax;
+    // }
 
+    // public int getDuree() {
+    //     return this.duree;
+    // }
+
+    // public float getPrix() {
+    //     return this.prix;
+    // }
+
+    public String toXML() {
+        chaine ="";
+        chaine += "     <attraction>" + "\n";
+        chaine += "          <nom>" + this.nom + "</nom>" + "\n";
+        chaine += "          <capaciteMax>" + this.capaciteMax + "</capaciteMax>" + "\n";
+        chaine += "          <duree>" + this.duree + "</duree>" + "\n";
+        chaine += "          <prix>" + this.prix + "</prix>" + "\n";
+        chaine += "     </attraction>" + "\n";
+        return chaine;
     }
+
 }
