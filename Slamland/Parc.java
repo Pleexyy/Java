@@ -39,6 +39,7 @@ public class Parc extends JPanel implements ActionListener {
 
     public String getLesAttractions() {
         String chaine ="";
+        chaine += "\n" + "<?xml version='1.0' encoding='UTF-8'?>";
         chaine += "\n" + "<lesAttractions>" + "\n";
         for (int i = 0; i < listeAttractions.size(); i++) {
             chaine += listeAttractions.get(i).toXML();

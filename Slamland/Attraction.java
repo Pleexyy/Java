@@ -20,7 +20,19 @@ public class Attraction {
         this.prix = prix;
         this.lesVisiteurs = lesVisiteurs;
     }
+
+    public Attraction(String nom, ArrayList <Visiteur> lesVisiteurs){
+        this.nom = nom;
+        this.lesVisiteurs = lesVisiteurs;
+    }
     
+    public Attraction(String nom) {
+        this.nom = nom;
+    }
+
+    public String getNom() {
+        return this.nom;
+    }
 	// public String getNom() {
     //     return this.nom;
     // }
@@ -36,6 +48,17 @@ public class Attraction {
     // public float getPrix() {
     //     return this.prix;
     // }
+
+    
+	public String getLesVisiteurs() {
+        String chaine = "\n";
+        chaine += "{'visiteur':" + '\n';
+        for (int i = 0; i < this.lesVisiteurs.size(); i++) {
+            chaine += this.lesVisiteurs.get(i).toJSON();
+        }
+        chaine += "}";
+        return chaine;
+    }
 
     public String toXML() {
         chaine ="";

@@ -1,6 +1,6 @@
 public class Visiteur {
 
-    private String nom, prenom, dateNaissance;
+    private String nom, prenom, dateNaissance, chaine;
 
     public Visiteur(String nom, String prenom, String dateNaissance) {
         this.nom = nom;
@@ -8,7 +8,7 @@ public class Visiteur {
         this.dateNaissance = dateNaissance;
     }
 
-    public String getNom() {
+	public String getNom() {
         return this.nom;
     }
 
@@ -20,6 +20,16 @@ public class Visiteur {
         return this.dateNaissance;
     }
 
+    public String toJSON() {
+        chaine = "";
+        chaine += "[{ 'prenom':" + this.prenom + ", 'nom':" + this.nom + ", :'dateNaissance': " + this.dateNaissance
+                + "}]" + "\n";
+        return chaine;
+    }
+    
 
+    // public String toCSV() {
+
+    // }
 
 }
