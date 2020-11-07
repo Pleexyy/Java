@@ -19,7 +19,7 @@ public class Parc extends JPanel implements ActionListener {
         this.listeAttractions = listeAttractions;
     }
 
-	public String getNom() {
+    public String getNom() {
         return this.nom;
     }
 
@@ -38,7 +38,7 @@ public class Parc extends JPanel implements ActionListener {
     }
 
     public String getLesAttractions() {
-        String chaine ="";
+        String chaine = "";
         chaine += "\n" + "<?xml version='1.0' encoding='UTF-8'?>";
         chaine += "\n" + "<lesAttractions>" + "\n";
         for (int i = 0; i < listeAttractions.size(); i++) {

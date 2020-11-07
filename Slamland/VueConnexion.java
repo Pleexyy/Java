@@ -56,7 +56,7 @@ public class VueConnexion extends JPanel implements ActionListener {
 	}
 
 	public void notConnected() {
-		JOptionPane.showMessageDialog(this, "L'identifiant ou le mot de passe saisi n'est pas correct.",
+		JOptionPane.showMessageDialog(this, "L'identifiant ou le mot de passe saisi est incorrect.",
 				"Erreur de connexion", JOptionPane.WARNING_MESSAGE);
 		revalidate();
 	}

@@ -32,7 +32,7 @@ public class VueVisiteurs extends JPanel implements ActionListener {
 
         generate2 = new JLabel();
         generate2.setText("Il contiendra la liste des visiteurs ayant participé à l'attraction choisie");
-        generate2.setBounds(175,150,100,100);
+        generate2.setBounds(175, 150, 100, 100);
 
         this.add(welcome);
         this.add(generate);

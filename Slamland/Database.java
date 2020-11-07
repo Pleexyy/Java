@@ -1,18 +1,15 @@
 import java.sql.*;
 import java.util.ArrayList;
-import java.io.*;
 
 public class Database {
 	private static Connection connexion;
-	private static Statement st;
-	private static ResultSet rs;
 
 	public static void connexionBdd() {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			connexion = DriverManager
 					.getConnection("jdbc:mariadb://localhost:3306/slamland?user=root&password=couleuvre");
-			st = connexion.createStatement();
+			connexion.createStatement();
 		}
 
 		catch (SQLException e) {
@@ -109,7 +106,7 @@ public class Database {
 					String prenom = resultVisiteurs.getString("prenom");
 					String nomVisiteur = resultVisiteurs.getString("nom");
 					String dateNaissance = resultVisiteurs.getString("dateNaissance");
-					
+
 					lesVisiteurs.add(new Visiteur(prenom, nomVisiteur, dateNaissance));
 				}
 				lesAttractions.add(new Attraction(nom, lesVisiteurs));
@@ -120,6 +117,74 @@ public class Database {
 			e.printStackTrace();
 		}
 		return lesAttractions;
+	}
+
+	public static ArrayList<Commerce> getLesCommerces() {
+		ArrayList<Commerce> lesCommerces = new ArrayList<Commerce>();
+		try {
+			connexionBdd();
+			String rsCommerces = "select id, nom from commerce;";
+			PreparedStatement preparedStatement = connexion.prepareStatement(rsCommerces);
+			ResultSet resultCommerces = preparedStatement.executeQuery();
+
+			while (resultCommerces.next()) {
+				ArrayList<Visiteur> lesConsommateurs = new ArrayList<Visiteur>();
+				int idcommerce = resultCommerces.getInt("id");
+				String nomcommerce = resultCommerces.getString("nom");
+
+				String rsConsommateurs = "select idachat, nomconsommateur, prenomconsommateur from acheter where idcommerce = ?;";
+				PreparedStatement preparedStatement2 = connexion.prepareStatement(rsConsommateurs);
+				preparedStatement2.setInt(1, idcommerce);
+				ResultSet resultConsommateurs = preparedStatement2.executeQuery();
+
+				while (resultConsommateurs.next()) {
+					String nomconsommateur = resultConsommateurs.getString("nomconsommateur");
+					String prenomconsommateur = resultConsommateurs.getString("prenomconsommateur");
+
+					lesConsommateurs.add(new Visiteur(prenomconsommateur, nomconsommateur));
+				}
+				lesCommerces.add(new Commerce(nomcommerce, lesConsommateurs));
+			}
+			resultCommerces.close();
+			deconnexionBdd();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lesCommerces;
+	}
+
+	public static ArrayList<Magasin> getLesMagasins() {
+		ArrayList<Magasin> lesMagasins = new ArrayList<Magasin>();
+		try {
+			connexionBdd();
+			String rsMagasins = "select idmagasin, nom from magasin;";
+			PreparedStatement preparedStatement = connexion.prepareStatement(rsMagasins);
+			ResultSet resultMagasins = preparedStatement.executeQuery();
+
+			while (resultMagasins.next()) {
+				ArrayList<Article> lesArticles = new ArrayList<Article>();
+				int idmagasin = resultMagasins.getInt("idmagasin");
+				String nommagasin = resultMagasins.getString("nom");
+
+				String rsArticles = "select idarticle, idmagasin, libelle, prix from posseder where idmagasin = ?;";
+				PreparedStatement preparedStatement2 = connexion.prepareStatement(rsArticles);
+				preparedStatement2.setInt(1, idmagasin);
+				ResultSet resultArticles = preparedStatement2.executeQuery();
+
+				while (resultArticles.next()) {
+					String libellearticle = resultArticles.getString("libelle");
+					float prixarticle = resultArticles.getFloat("prix");
+
+					lesArticles.add(new Article(libellearticle, prixarticle));
+				}
+				lesMagasins.add(new Magasin(nommagasin, lesArticles));
+			}
+			resultMagasins.close();
+			deconnexionBdd();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lesMagasins;
 	}
 
 }
