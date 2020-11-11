@@ -22,18 +22,21 @@ public class VueCommerce extends JPanel implements ActionListener {
         welcome.setText("Veuillez sélectionner un commerce");
         welcome.setBounds(50, 50, 50, 50);
 
+        /* ajoute chaque élément de notre liste de commerces dans une JComboBox */
         for (int i = 0; i < listeCommerces.size(); i++) {
             commerces.addItem(listeCommerces.get(i).getNom());
         }
-
+        /* texte informatif */
         generate = new JLabel();
         generate.setText("Un texte au format CSV sera affiché dans la console.");
         generate.setBounds(150, 150, 100, 100);
 
+        /* texte informatif */
         generate2 = new JLabel();
         generate2.setText("Il contiendra la liste des consommateurs (personnes ayant acheté)");
         generate2.setBounds(175, 150, 100, 100);
 
+        /* ajoute les éléments à notre panel */
         this.add(welcome);
         this.add(generate);
         this.add(generate2);

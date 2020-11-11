@@ -13,6 +13,10 @@ public class Commerce {
         return this.nom;
     }
 
+    /*
+     * récupère la liste des personnes ayant réalisé un ou plusieurs achats et
+     * l'affiche au format CSV
+     */
     public String getLesConsommateurs() {
         String chaine = "";
         chaine += "\n" + "prénom consommateur, nom consommateur" + "\n";

@@ -3,7 +3,11 @@ import java.util.ArrayList;
 
 public class Database {
 	private static Connection connexion;
+	private static PreparedStatement preparedStatement, preparedStatement2;
+	private static ResultSet result, resultParc, resultAttractions, resultVisiteurs, resultCommerces,
+			resultConsommateurs, resultMagasins, resultArticles, resultCompte;
 
+	/* fonction de connexion à la base de données */
 	public static void connexionBdd() {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
@@ -19,6 +23,7 @@ public class Database {
 		}
 	}
 
+	/* fonction de déconnexion de notre base de données */
 	public static void deconnexionBdd() {
 		try {
 			connexion.close();
@@ -27,17 +32,17 @@ public class Database {
 		}
 	}
 
+	/* fonction de connexion au formulaire d'authentification */
 	public static boolean connexion(String login, String mdp) {
 		boolean rep = false;
 		try {
 			connexionBdd();
-			String rsInfo = "select login, mdp from utilisateur where login = ? and mdp = ?;";
-			PreparedStatement preparedStatement = connexion.prepareStatement(rsInfo);
+			String rsInfo = "select count(login) as nb from utilisateur where login = ? and mdp = ?;";
+			preparedStatement = connexion.prepareStatement(rsInfo);
 			preparedStatement.setString(1, login);
 			preparedStatement.setString(2, mdp);
-			ResultSet result = preparedStatement.executeQuery();
-			if (result.first()) {
-				// String getLogin = rs.getString("login");
+			result = preparedStatement.executeQuery();
+			if (result.next() && result.getInt("nb") > 0) {
 				rep = true;
 			}
 			result.close();
@@ -48,31 +53,31 @@ public class Database {
 		return rep;
 	}
 
+	/* fonction qui récupère la liste des parcs */
 	public static ArrayList<Parc> getLesParcs() {
 		ArrayList<Parc> lesParcs = new ArrayList<Parc>();
 		try {
 			connexionBdd();
 			String rsParc = "select id, nom, ville from parcattractions;";
-			PreparedStatement preparedStatement = connexion.prepareStatement(rsParc);
-			ResultSet resultParc = preparedStatement.executeQuery();
+			preparedStatement = connexion.prepareStatement(rsParc);
+			resultParc = preparedStatement.executeQuery();
 			while (resultParc.next()) {
 				ArrayList<Attraction> lesAttractions = new ArrayList<Attraction>();
 				int id = resultParc.getInt("id");
 				String nom = resultParc.getString("nom");
 				String ville = resultParc.getString("ville");
 
-				String rsAttractions = "select nom, capaciteMax, duree, prix from attractions where idparc  = ?;";
-				PreparedStatement preparedStatement2 = connexion.prepareStatement(rsAttractions);
+				String rsAttractions = "select nom, capaciteMax, duree from attractions where idparc  = ?;";
+				preparedStatement2 = connexion.prepareStatement(rsAttractions);
 				preparedStatement2.setInt(1, id);
-				ResultSet result = preparedStatement2.executeQuery();
+				result = preparedStatement2.executeQuery();
 
 				while (result.next()) {
 					String nomAttraction = result.getString("nom");
 					int capaciteMax = result.getInt("capaciteMax");
 					int duree = result.getInt("duree");
-					float prix = result.getInt("prix");
 
-					lesAttractions.add(new Attraction(nomAttraction, capaciteMax, duree, prix));
+					lesAttractions.add(new Attraction(nomAttraction, capaciteMax, duree));
 				}
 				lesParcs.add(new Parc(id, nom, ville, lesAttractions));
 			}
@@ -84,13 +89,14 @@ public class Database {
 		return lesParcs;
 	}
 
+	/* fonctions qui récupère la liste des attractions */
 	public static ArrayList<Attraction> getLesAttractions() {
 		ArrayList<Attraction> lesAttractions = new ArrayList<Attraction>();
 		try {
 			connexionBdd();
 			String rsAttractions = "select id, nom from attractions;";
-			PreparedStatement preparedStatement = connexion.prepareStatement(rsAttractions);
-			ResultSet resultAttractions = preparedStatement.executeQuery();
+			preparedStatement = connexion.prepareStatement(rsAttractions);
+			resultAttractions = preparedStatement.executeQuery();
 
 			while (resultAttractions.next()) {
 				ArrayList<Visiteur> lesVisiteurs = new ArrayList<Visiteur>();
@@ -98,9 +104,9 @@ public class Database {
 				String nom = resultAttractions.getString("nom");
 
 				String rsVisiteurs = "select prenom, nom, dateNaissance from participer where idattraction = ?;";
-				PreparedStatement preparedStatement2 = connexion.prepareStatement(rsVisiteurs);
+				preparedStatement2 = connexion.prepareStatement(rsVisiteurs);
 				preparedStatement2.setInt(1, idattraction);
-				ResultSet resultVisiteurs = preparedStatement2.executeQuery();
+				resultVisiteurs = preparedStatement2.executeQuery();
 
 				while (resultVisiteurs.next()) {
 					String prenom = resultVisiteurs.getString("prenom");
@@ -119,13 +125,14 @@ public class Database {
 		return lesAttractions;
 	}
 
+	/* fonction qui récupère la liste des commerces */
 	public static ArrayList<Commerce> getLesCommerces() {
 		ArrayList<Commerce> lesCommerces = new ArrayList<Commerce>();
 		try {
 			connexionBdd();
 			String rsCommerces = "select id, nom from commerce;";
-			PreparedStatement preparedStatement = connexion.prepareStatement(rsCommerces);
-			ResultSet resultCommerces = preparedStatement.executeQuery();
+			preparedStatement = connexion.prepareStatement(rsCommerces);
+			resultCommerces = preparedStatement.executeQuery();
 
 			while (resultCommerces.next()) {
 				ArrayList<Visiteur> lesConsommateurs = new ArrayList<Visiteur>();
@@ -133,9 +140,9 @@ public class Database {
 				String nomcommerce = resultCommerces.getString("nom");
 
 				String rsConsommateurs = "select idachat, nomconsommateur, prenomconsommateur from acheter where idcommerce = ?;";
-				PreparedStatement preparedStatement2 = connexion.prepareStatement(rsConsommateurs);
+				preparedStatement2 = connexion.prepareStatement(rsConsommateurs);
 				preparedStatement2.setInt(1, idcommerce);
-				ResultSet resultConsommateurs = preparedStatement2.executeQuery();
+				resultConsommateurs = preparedStatement2.executeQuery();
 
 				while (resultConsommateurs.next()) {
 					String nomconsommateur = resultConsommateurs.getString("nomconsommateur");
@@ -153,13 +160,14 @@ public class Database {
 		return lesCommerces;
 	}
 
+	/* fonction qui récupère la liste des magasins */
 	public static ArrayList<Magasin> getLesMagasins() {
 		ArrayList<Magasin> lesMagasins = new ArrayList<Magasin>();
 		try {
 			connexionBdd();
 			String rsMagasins = "select idmagasin, nom from magasin;";
-			PreparedStatement preparedStatement = connexion.prepareStatement(rsMagasins);
-			ResultSet resultMagasins = preparedStatement.executeQuery();
+			preparedStatement = connexion.prepareStatement(rsMagasins);
+			resultMagasins = preparedStatement.executeQuery();
 
 			while (resultMagasins.next()) {
 				ArrayList<Article> lesArticles = new ArrayList<Article>();
@@ -167,9 +175,9 @@ public class Database {
 				String nommagasin = resultMagasins.getString("nom");
 
 				String rsArticles = "select idarticle, idmagasin, libelle, prix from posseder where idmagasin = ?;";
-				PreparedStatement preparedStatement2 = connexion.prepareStatement(rsArticles);
+				preparedStatement2 = connexion.prepareStatement(rsArticles);
 				preparedStatement2.setInt(1, idmagasin);
-				ResultSet resultArticles = preparedStatement2.executeQuery();
+				resultArticles = preparedStatement2.executeQuery();
 
 				while (resultArticles.next()) {
 					String libellearticle = resultArticles.getString("libelle");
@@ -187,4 +195,39 @@ public class Database {
 		return lesMagasins;
 	}
 
+	public static int getLesCA() {
+		int total = 0;
+		int nbParticipations, prixbillet;
+		try {
+			connexionBdd();
+			String rsParc = "select id, prixbillet from parcattractions;";
+			preparedStatement = connexion.prepareStatement(rsParc);
+			resultParc = preparedStatement.executeQuery();
+
+			while (resultParc.next()) {
+				int id = resultParc.getInt("id");
+				prixbillet = resultParc.getInt("prixbillet");
+
+				String rsParticipations = "select count(idparticipation) as nbParticipations from participer where idparc = ?;";
+				preparedStatement2 = connexion.prepareStatement(rsParticipations);
+				preparedStatement2.setInt(1, id);
+				resultCompte = preparedStatement2.executeQuery();
+
+				while (resultCompte.next()) {
+					nbParticipations = resultCompte.getInt("nbParticipations");
+					/*
+					 * on récupère le chiffre d'affaires de l'attraction en multipliant le prix par
+					 * le nombre de participants de l'attraction
+					 */
+					total = prixbillet * nbParticipations;
+				}
+			}
+			resultParc.close();
+			deconnexionBdd();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return total;
+
+	}
 }

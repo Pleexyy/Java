@@ -37,6 +37,7 @@ public class Parc extends JPanel implements ActionListener {
 
     }
 
+    /* fonction qui récupère la liste des attractions et l'affiche au format XML */
     public String getLesAttractions() {
         String chaine = "";
         chaine += "\n" + "<?xml version='1.0' encoding='UTF-8'?>";
@@ -47,4 +48,12 @@ public class Parc extends JPanel implements ActionListener {
         chaine += "</lesAttractions>";
         return chaine;
     }
+
+
+    public String calculerCA() {
+        String chaine = "";
+        chaine += "chiffre d'affaires du parc : " + Database.getLesCA();
+        return chaine;
+    }
+
 }

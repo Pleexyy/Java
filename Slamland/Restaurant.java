@@ -6,4 +6,13 @@ public class Restaurant {
         this.nbTables = nbTables;
         this.capacite = capacite;
     }
+
+    public String getNbTables() {
+        return this.nbTables;
+    }
+
+    public int getCapacite() {
+        return this.capacite;
+    }
+
 }

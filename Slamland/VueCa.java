@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class VueAttractions extends JPanel implements ActionListener {
+public class VueCa extends JPanel implements ActionListener {
     private JTable table;
     private ArrayList<Parc> listeParcs;
     private JFrame frame;
@@ -15,25 +15,28 @@ public class VueAttractions extends JPanel implements ActionListener {
      */
     private static final long serialVersionUID = 1L;
 
-    public VueAttractions(JFrame frame) {
+    public VueCa(JFrame frame) {
         this.frame = frame;
         listeParcs = Database.getLesParcs();
         welcome = new JLabel();
         welcome.setText("Veuillez sélectionner un parc d'attractions");
         welcome.setBounds(50, 50, 50, 50);
-        /* ajoute chaque élément de notre liste de parcs dans une JComboBox */
+
+        /* ajoute chaque élément de notre liste d'attractions dans une JComboBox */
         for (int i = 0; i < listeParcs.size(); i++) {
-            parcs.addItem(listeParcs.get(i).getNom() + " " + listeParcs.get(i).getVille());
+            parcs.addItem(listeParcs.get(i).getNom());
         }
+
         /* texte informatif */
         generate = new JLabel();
-        generate.setText("Un texte au format XML sera affiché dans la console");
+        generate.setText("Le chiffre d'affaires du parc choisi sera affiché dans la console.");
         generate.setBounds(150, 150, 100, 100);
 
-        /* ajoute les éléments à notre panel */
+        /* ajoute les éléments à notre JPanel */
         this.add(welcome);
         this.add(generate);
         this.add(parcs);
+
         this.add(new JScrollPane(table));
 
     }
@@ -46,9 +49,8 @@ public class VueAttractions extends JPanel implements ActionListener {
 
             public void actionPerformed(ActionEvent e) {
                 int index = parcs.getSelectedIndex();
-
                 Parc parc = listeParcs.get(index);
-                System.out.println(parc.getLesAttractions());
+                System.out.println(parc.calculerCA());
             }
         });
 

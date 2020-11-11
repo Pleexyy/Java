@@ -22,18 +22,22 @@ public class VueVisiteurs extends JPanel implements ActionListener {
         welcome.setText("Veuillez sélectionner une attraction");
         welcome.setBounds(50, 50, 50, 50);
 
+        /* ajoute chaque élément de notre liste d'attractions dans une JComboBox */
         for (int i = 0; i < listeAttractions.size(); i++) {
             attractions.addItem(listeAttractions.get(i).getNom());
         }
 
+        /* texte informatif */
         generate = new JLabel();
         generate.setText("Un texte au format JSON sera affiché dans la console.");
         generate.setBounds(150, 150, 100, 100);
 
+        /* texte informatif */
         generate2 = new JLabel();
         generate2.setText("Il contiendra la liste des visiteurs ayant participé à l'attraction choisie");
         generate2.setBounds(175, 150, 100, 100);
 
+        /* ajoute les éléments à notre JPanel */
         this.add(welcome);
         this.add(generate);
         this.add(generate2);

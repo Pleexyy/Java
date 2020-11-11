@@ -19,29 +19,32 @@ public class VueConnexion extends JPanel implements ActionListener {
 		this.frame = frame;
 		this.setLayout(null);
 
+		/* texte informatif */
 		welcome = new JLabel("Bienvenue sur l'interface administrateur");
 		welcome.setFont(new Font("Arial", Font.BOLD, 14));
 		welcome.setBounds(90, 40, 380, 100);
-		this.add(welcome);
-
 		userLabel = new JLabel("Login");
 		userLabel.setBounds(115, 200, 80, 25);
-		this.add(userLabel);
 
+		/* champ de saisi du login */
 		userText = new JTextField(20);
 		userText.setBounds(220, 200, 160, 25);
-		this.add(userText);
 
 		passwordLabel = new JLabel("Mot de passe");
 		passwordLabel.setBounds(115, 230, 100, 25);
-		this.add(passwordLabel);
-
+		/* champ de saisi du mot de passe */
 		passwordText = new JPasswordField(20);
 		passwordText.setBounds(220, 230, 160, 25);
-		this.add(passwordText);
-
+		/* bouton de connexion */
 		loginButton = new JButton("Se connecter");
 		loginButton.setBounds(190, 270, 150, 25);
+
+		/* ajoute les éléments à notre panel */
+		this.add(welcome);
+		this.add(userLabel);
+		this.add(userText);
+		this.add(passwordLabel);
+		this.add(passwordText);
 		this.add(loginButton);
 
 		loginButton.addActionListener(this);
@@ -50,11 +53,17 @@ public class VueConnexion extends JPanel implements ActionListener {
 
 	}
 
+	/* fonction qui affiche une boite de dialogue pour confirmer la connexion */
 	public void connected() {
 		JOptionPane.showMessageDialog(this, "Connexion réussie.");
 		revalidate();
+		removeAll();
 	}
 
+	/*
+	 * fonction qui affiche une boite de dialogue pour signaler une erreur lors de
+	 * la connexion
+	 */
 	public void notConnected() {
 		JOptionPane.showMessageDialog(this, "L'identifiant ou le mot de passe saisi est incorrect.",
 				"Erreur de connexion", JOptionPane.WARNING_MESSAGE);
@@ -62,6 +71,10 @@ public class VueConnexion extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		/*
+		 * appelle notre fonction de connexion à la base de données et affiche notre
+		 * menu si la connexion a bien été effectuée
+		 */
 		if (e.getSource() == loginButton) {
 			String login = userText.getText();
 			String mdp = String.valueOf(passwordText.getPassword());

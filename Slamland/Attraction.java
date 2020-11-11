@@ -4,21 +4,18 @@ public class Attraction {
 
     private String nom, chaine;
     private int capaciteMax, duree;
-    private float prix;
     private ArrayList<Visiteur> lesVisiteurs;
 
-    public Attraction(String nom, int capaciteMax, int duree, float prix) {
+    public Attraction(String nom, int capaciteMax, int duree) {
         this.nom = nom;
         this.capaciteMax = capaciteMax;
         this.duree = duree;
-        this.prix = prix;
     }
 
     public Attraction(String nom, int capaciteMax, int duree, float prix, ArrayList<Visiteur> lesVisiteurs) {
         this.nom = nom;
         this.capaciteMax = capaciteMax;
         this.duree = duree;
-        this.prix = prix;
         this.lesVisiteurs = lesVisiteurs;
     }
 
@@ -35,6 +32,7 @@ public class Attraction {
         return this.nom;
     }
 
+    /* récupère les visiteurs d'une attraction et l'affiche au format JSON */
     public String getLesVisiteurs() {
         String chaine = "\n";
         chaine += "{\"visiteurs\":" + '\n';
@@ -45,13 +43,13 @@ public class Attraction {
         return chaine;
     }
 
+    /* fonction qui renvoie les informations d'une attraction au format XML */
     public String toXML() {
         chaine = "";
         chaine += "     <attraction>" + "\n";
         chaine += "          <nom>" + this.nom + "</nom>" + "\n";
         chaine += "          <capaciteMax>" + this.capaciteMax + "</capaciteMax>" + "\n";
         chaine += "          <duree>" + this.duree + "</duree>" + "\n";
-        chaine += "          <prix>" + this.prix + "</prix>" + "\n";
         chaine += "     </attraction>" + "\n";
         return chaine;
     }

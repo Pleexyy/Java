@@ -17,6 +17,7 @@ public class Magasin {
         return this.nom;
     }
 
+    /* fonction qui récupère les articles et l'affiche au format JSON */
     public String getLesArticles() {
         String chaine = "\n";
         chaine += "{\"articles\":" + '\n';

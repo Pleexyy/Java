@@ -7,6 +7,7 @@ public class Article {
         this.prix = prix;
     }
 
+    /* fonction qui renvoie les informations d'un article au format JSON */
     public String toJSON() {
         chaine = "";
         chaine += "[{\"libelle\":" + "\"" + this.libelle + "\"" + ", \"prix\":" + "\"" + this.prix + "\"" + "}]" + "\n";
