@@ -10,9 +10,9 @@ public class Database {
 	/* fonction de connexion à la base de données */
 	public static void connexionBdd() {
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			connexion = DriverManager
-					.getConnection("jdbc:mariadb://localhost:3306/slamland?user=root&password=couleuvre");
+					.getConnection("jdbc:mysql://172.16.250.8/slamland?user=sio&password=slam");
 			connexion.createStatement();
 		}
 

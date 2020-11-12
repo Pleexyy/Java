@@ -10,25 +10,31 @@ public class VueMenu extends JPanel implements ActionListener {
      */
     private static final long serialVersionUID = 1L;
     private JMenuBar barre;
-    private JMenu menu;
-    private JMenuItem attraction, visiteurs, commerces, magasins, ca;
+    private JMenu menu, gestionVisiteurs;
+    private JMenuItem attraction, visiteurs, commerces, magasins, ca, ajoutVisiteurs, supprimerVisiteurs;
 
     public VueMenu(JFrame frame) {
         barre = new JMenuBar();
-        menu = new JMenu("Menu");
+        menu = new JMenu("Affichage des informations");
+        gestionVisiteurs = new JMenu("Gestion des visiteurs");
+        
         /* création de chaque option de menu */
         ca = new JMenuItem("Afficher le chiffre d'affaires d'une attraction");
         attraction = new JMenuItem("Afficher les attractions des parcs");
         visiteurs = new JMenuItem("Afficher les visiteurs d'une attraction");
         commerces = new JMenuItem("Afficher les consommateurs");
         magasins = new JMenuItem("Afficher les articles d'un magasin");
-
+        ajoutVisiteurs = new JMenuItem("Ajouter un visiteur");
+        supprimerVisiteurs = new JMenuItem("Supprimer un visiteur");
+        
         /* ajout des actions listeners pour chaque items de notre menu */
         attraction.addActionListener(new VueAttractions(frame));
         visiteurs.addActionListener(new VueVisiteurs(frame));
         commerces.addActionListener(new VueCommerce(frame));
         magasins.addActionListener(new VueMagasin(frame));
         ca.addActionListener(new VueCa(frame));
+        
+        ajoutVisiteurs.addActionListener(new VueAjouter(frame));
 
         /* ajoute les items créés à notre menu */
         menu.add(ca);
@@ -36,7 +42,12 @@ public class VueMenu extends JPanel implements ActionListener {
         menu.add(visiteurs);
         menu.add(commerces);
         menu.add(magasins);
+        	
+        gestionVisiteurs.add(ajoutVisiteurs);
+        gestionVisiteurs.add(supprimerVisiteurs);
+        
         barre.add(menu);
+        barre.add(gestionVisiteurs);
 
         this.add(barre);
 
