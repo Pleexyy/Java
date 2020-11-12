@@ -6,13 +6,14 @@ public class Database {
 	private static PreparedStatement preparedStatement, preparedStatement2;
 	private static ResultSet result, resultParc, resultAttractions, resultVisiteurs, resultCommerces,
 			resultConsommateurs, resultMagasins, resultArticles, resultCompte;
+	private static int resultInsert;
 
 	/* fonction de connexion à la base de données */
 	public static void connexionBdd() {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("org.mariadb.jdbc.Driver");
 			connexion = DriverManager
-					.getConnection("jdbc:mysql://172.16.250.8/slamland?user=sio&password=slam");
+					.getConnection("jdbc:mariadb://localhost:3306/slamland?user=root&password=couleuvre");
 			connexion.createStatement();
 		}
 
@@ -228,6 +229,24 @@ public class Database {
 			e.printStackTrace();
 		}
 		return total;
+	}
 
+	public static int ajouterVisiteur(int valId, String valNom, String valPrenom, String valDateNaissance) {
+		try {
+			connexionBdd();
+			String rsInsert = "INSERT INTO visiteur (id, nom, prenom, dateNaissance) VALUES (?, ?, ?, ?);";
+			preparedStatement = connexion.prepareStatement(rsInsert);
+
+			preparedStatement.setInt(1, valId);
+			preparedStatement.setString(2, valNom);
+			preparedStatement.setString(3, valPrenom);
+			preparedStatement.setString(4, valDateNaissance);
+
+			resultInsert = preparedStatement.executeUpdate();
+			deconnexionBdd();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultInsert;
 	}
 }

@@ -1,6 +1,8 @@
 import javax.swing.*;
-
+import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,9 +37,16 @@ public class VueConnexion extends JPanel implements ActionListener {
 		/* champ de saisi du mot de passe */
 		passwordText = new JPasswordField(20);
 		passwordText.setBounds(220, 230, 160, 25);
+
 		/* bouton de connexion */
 		loginButton = new JButton("Se connecter");
 		loginButton.setBounds(190, 270, 150, 25);
+		loginButton.setBounds(175, 270, 150, 25);
+		loginButton.setBackground(new Color(59, 89, 182));
+		loginButton.setForeground(Color.WHITE);
+		loginButton.setFocusPainted(false);
+		loginButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		loginButton.addActionListener(this);
 
 		/* ajoute les éléments à notre panel */
 		this.add(welcome);
@@ -46,8 +55,6 @@ public class VueConnexion extends JPanel implements ActionListener {
 		this.add(passwordLabel);
 		this.add(passwordText);
 		this.add(loginButton);
-
-		loginButton.addActionListener(this);
 
 		setVisible(true);
 

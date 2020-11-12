@@ -33,8 +33,8 @@ public class VueMenu extends JPanel implements ActionListener {
         commerces.addActionListener(new VueCommerce(frame));
         magasins.addActionListener(new VueMagasin(frame));
         ca.addActionListener(new VueCa(frame));
-        
         ajoutVisiteurs.addActionListener(new VueAjouter(frame));
+        supprimerVisiteurs.addActionListener(new VueSuppression(frame));
 
         /* ajoute les items créés à notre menu */
         menu.add(ca);

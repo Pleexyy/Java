@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -57,6 +56,7 @@ public class VueCommerce extends JPanel implements ActionListener {
 
                 Commerce commerce = listeCommerces.get(index);
                 System.out.println(commerce.getLesConsommateurs());
+                // assertFalse(commerce.getLesConsommateurs().isEmpty());
             }
         });
 
