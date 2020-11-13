@@ -11,9 +11,8 @@ public class Database {
 	/* fonction de connexion à la base de données */
 	public static void connexionBdd() {
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			connexion = DriverManager
-					.getConnection("jdbc:mariadb://localhost:3306/slamland?user=root&password=couleuvre");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connexion = DriverManager.getConnection("jdbc:mysql://172.16.250.8/slamland?user=sio&password=slam");
 			connexion.createStatement();
 		}
 
@@ -249,4 +248,30 @@ public class Database {
 		}
 		return resultInsert;
 	}
+	
+	public static ArrayList<Visiteur> getLesVisiteurs() {
+		ArrayList <Visiteur> visiteurs1 = new ArrayList<Visiteur>();
+		try {
+			connexionBdd();
+			String rsSelect = "select id, nom, prenom, dateNaissance from visiteur;";
+			preparedStatement = connexion.prepareStatement(rsSelect);
+
+			resultVisiteurs = preparedStatement.executeQuery();
+			
+			while (resultVisiteurs.next()) {
+				int id = resultVisiteurs.getInt("id");
+				String nom  = resultVisiteurs.getString("nom");
+				String prenom = resultVisiteurs.getString("prenom");
+				String dateNaissance = resultVisiteurs.getString("dateNaissance");
+				Visiteur visiteur = new Visiteur(id, nom, prenom, dateNaissance);
+				visiteurs1.add(visiteur);
+			}
+			
+			deconnexionBdd();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return visiteurs1;
+	}
+	
 }

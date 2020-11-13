@@ -1,5 +1,6 @@
 import javax.swing.*;
 
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class VueVisiteurs extends JPanel implements ActionListener {
     private JFrame frame;
     private JComboBox<String> attractions = new JComboBox<>();
     private JLabel welcome, generate, generate2;
+    private TextArea textArea;
     /**
      *
      */
@@ -26,7 +28,10 @@ public class VueVisiteurs extends JPanel implements ActionListener {
         for (int i = 0; i < listeAttractions.size(); i++) {
             attractions.addItem(listeAttractions.get(i).getNom());
         }
-
+        	
+        textArea = new TextArea();  
+        textArea.setBounds(10,30, 300,300);
+        
         /* texte informatif */
         generate = new JLabel();
         generate.setText("Un texte au format JSON sera affiché dans la console.");
@@ -42,9 +47,15 @@ public class VueVisiteurs extends JPanel implements ActionListener {
         this.add(generate);
         this.add(generate2);
         this.add(attractions);
+        this.add(textArea);
 
         this.add(new JScrollPane(table));
 
+    }
+    
+    public void setText(String visiteurs) {
+    	textArea.setText(visiteurs);
+    	textArea.setEditable(false);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -57,7 +68,7 @@ public class VueVisiteurs extends JPanel implements ActionListener {
                 int index = attractions.getSelectedIndex();
 
                 Attraction attraction = listeAttractions.get(index);
-                System.out.println(attraction.getLesVisiteurs());
+                textArea.setText(attraction.getLesVisiteurs());
             }
         });
 
