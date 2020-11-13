@@ -17,16 +17,17 @@ public class VueMenu extends JPanel implements ActionListener {
         barre = new JMenuBar();
         menu = new JMenu("Affichage des informations");
         gestionVisiteurs = new JMenu("Gestion des visiteurs");
-        
+
         /* création de chaque option de menu */
-        ca = new JMenuItem("Afficher le chiffre d'affaires d'une attraction");
-        attraction = new JMenuItem("Afficher les attractions des parcs");
+        ca = new JMenuItem("Afficher le chiffre d'affaires d'un parc d'attractions");
+        attraction = new JMenuItem("Afficher les attractions d'un parc");
         visiteurs = new JMenuItem("Afficher les visiteurs d'une attraction");
         commerces = new JMenuItem("Afficher les consommateurs");
         magasins = new JMenuItem("Afficher les articles d'un magasin");
+
         ajoutVisiteurs = new JMenuItem("Ajouter un visiteur");
         supprimerVisiteurs = new JMenuItem("Supprimer un visiteur");
-        
+
         /* ajout des actions listeners pour chaque items de notre menu */
         attraction.addActionListener(new VueAttractions(frame));
         visiteurs.addActionListener(new VueVisiteurs(frame));
@@ -42,10 +43,12 @@ public class VueMenu extends JPanel implements ActionListener {
         menu.add(visiteurs);
         menu.add(commerces);
         menu.add(magasins);
-        	
+
+        /* ajoute les items créés à notre second menu */
         gestionVisiteurs.add(ajoutVisiteurs);
         gestionVisiteurs.add(supprimerVisiteurs);
-        
+
+        /* ajoute les menus à notre barre */
         barre.add(menu);
         barre.add(gestionVisiteurs);
 

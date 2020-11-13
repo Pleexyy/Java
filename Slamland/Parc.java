@@ -1,17 +1,17 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Parc extends JPanel implements ActionListener {
+public class Parc extends JPanel {
     /**
      *
      */
+    /* attributs privés */
     private static final long serialVersionUID = 1L;
     private String nom, ville;
     private int id;
     private ArrayList<Attraction> listeAttractions;
 
+    /* constructeur */
     public Parc(int id, String nom, String ville, ArrayList<Attraction> listeAttractions) {
         this.id = id;
         this.nom = nom;
@@ -19,22 +19,19 @@ public class Parc extends JPanel implements ActionListener {
         this.listeAttractions = listeAttractions;
     }
 
+    /* getter */
     public String getNom() {
         return this.nom;
     }
+    /* getter */
 
     public String getVille() {
         return this.ville;
     }
+    /* getter */
 
     public int getId() {
         return this.id;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
-
     }
 
     /* fonction qui récupère la liste des attractions et l'affiche au format XML */
@@ -49,10 +46,9 @@ public class Parc extends JPanel implements ActionListener {
         return chaine;
     }
 
-
-    public String calculerCA() {
+    public String calculerCA(String nomParc) {
         String chaine = "";
-        chaine += "chiffre d'affaires du parc : " + Database.getLesCA();
+        chaine += "chiffre d'affaires du parc : " + Database.getLesCA(nomParc) + " €";
         return chaine;
     }
 

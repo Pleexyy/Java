@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 11, 2020 at 05:25 PM
+-- Generation Time: Nov 13, 2020 at 07:20 PM
 -- Server version: 10.4.12-MariaDB
 -- PHP Version: 7.4.6
 
@@ -165,7 +165,8 @@ CREATE TABLE `participer` (
 
 INSERT INTO `participer` (`idparticipation`, `idattraction`, `idvisiteur`, `prenom`, `nom`, `dateNaissance`, `idparc`) VALUES
 (1, 482, 24, 'david', 'dupont', '15/02/1997', 1),
-(2, 482, 25, 'martin', 'chane', '15/02/1999', 1);
+(2, 482, 25, 'martin', 'chane', '15/02/1999', 1),
+(5, 784, 7, 'ty', 'ty', '07/02/1967', 2);
 
 -- --------------------------------------------------------
 
@@ -241,8 +242,11 @@ CREATE TABLE `visiteur` (
 --
 
 INSERT INTO `visiteur` (`id`, `nom`, `prenom`, `dateNaissance`) VALUES
+(3, 'pom', 'pom', '02/04/2000'),
+(7, 'ty', 'ty', '07/02/1967'),
 (24, 'david', 'dupont', '15/02/1985'),
-(25, 'martin', 'chane', '15/02/1999');
+(25, 'martin', 'chane', '15/02/1999'),
+(732, 'vi', 'vi', '15/08/1997');
 
 --
 -- Indexes for dumped tables
@@ -334,7 +338,7 @@ ALTER TABLE `commerce`
 -- AUTO_INCREMENT for table `participer`
 --
 ALTER TABLE `participer`
-  MODIFY `idparticipation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idparticipation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

@@ -31,25 +31,24 @@ public class VueAttractions extends JPanel implements ActionListener {
         generate = new JLabel();
         generate.setText("Un texte au format XML sera affiché dans la console");
         generate.setBounds(150, 150, 100, 100);
-        	
-        textArea = new TextArea();  
-        textArea.setBounds(10,30, 300,300);
-        
+
+        textArea = new TextArea();
+        textArea.setBounds(10, 30, 300, 300);
+
         /* ajoute les éléments à notre panel */
         this.add(welcome);
         this.add(generate);
         this.add(parcs);
         this.add(textArea);
         this.add(new JScrollPane(table));
-        
-
     }
 
+    /* fonction qui nous permet de remplir notre zone de texte */
     public void setText(String listeXML) {
-    	textArea.setText(listeXML);
-    	textArea.setEditable(false);
+        textArea.setText(listeXML);
+        textArea.setEditable(false);
     }
-    
+
     public void actionPerformed(ActionEvent e) {
         this.frame.setContentPane(this);
         this.frame.revalidate();

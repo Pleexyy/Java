@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.TextArea;
 
 public class VueCommerce extends JPanel implements ActionListener {
     private JTable table;
@@ -9,6 +10,7 @@ public class VueCommerce extends JPanel implements ActionListener {
     private JFrame frame;
     private JComboBox<String> commerces = new JComboBox<>();
     private JLabel welcome, generate, generate2;
+    private TextArea textArea;
     /**
      *
      */
@@ -35,14 +37,24 @@ public class VueCommerce extends JPanel implements ActionListener {
         generate2.setText("Il contiendra la liste des consommateurs (personnes ayant acheté)");
         generate2.setBounds(175, 150, 100, 100);
 
+        textArea = new TextArea();
+        textArea.setBounds(10, 30, 300, 300);
+
         /* ajoute les éléments à notre panel */
         this.add(welcome);
         this.add(generate);
         this.add(generate2);
         this.add(commerces);
+        this.add(textArea);
 
         this.add(new JScrollPane(table));
 
+    }
+
+    /* fonction qui nous permet de remplir notre zone de texte */
+    public void setText(String listeConsommateurs) {
+        textArea.setText(listeConsommateurs);
+        textArea.setEditable(false);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -55,8 +67,8 @@ public class VueCommerce extends JPanel implements ActionListener {
                 int index = commerces.getSelectedIndex();
 
                 Commerce commerce = listeCommerces.get(index);
-                System.out.println(commerce.getLesConsommateurs());
-                // assertFalse(commerce.getLesConsommateurs().isEmpty());
+                /* ajout du texte à notre zone de texte */
+                setText(commerce.getLesConsommateurs());
             }
         });
 

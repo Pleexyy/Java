@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class VueVisiteurs extends JPanel implements ActionListener {
-    private JTable table;
     private ArrayList<Attraction> listeAttractions;
     private JFrame frame;
     private JComboBox<String> attractions = new JComboBox<>();
@@ -28,10 +27,10 @@ public class VueVisiteurs extends JPanel implements ActionListener {
         for (int i = 0; i < listeAttractions.size(); i++) {
             attractions.addItem(listeAttractions.get(i).getNom());
         }
-        	
-        textArea = new TextArea();  
-        textArea.setBounds(10,30, 300,300);
-        
+
+        textArea = new TextArea();
+        textArea.setBounds(10, 30, 300, 300);
+
         /* texte informatif */
         generate = new JLabel();
         generate.setText("Un texte au format JSON sera affiché dans la console.");
@@ -48,14 +47,12 @@ public class VueVisiteurs extends JPanel implements ActionListener {
         this.add(generate2);
         this.add(attractions);
         this.add(textArea);
-
-        this.add(new JScrollPane(table));
-
     }
-    
+
+    /* fonction qui nous permet de remplir notre zone de texte */
     public void setText(String visiteurs) {
-    	textArea.setText(visiteurs);
-    	textArea.setEditable(false);
+        textArea.setText(visiteurs);
+        textArea.setEditable(false);
     }
 
     public void actionPerformed(ActionEvent e) {

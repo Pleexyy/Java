@@ -1,7 +1,9 @@
 public class Article {
+    /* attributs privés */
     private String libelle, chaine;
     private float prix;
 
+    /* constructeur */
     public Article(String libelle, float prix) {
         this.libelle = libelle;
         this.prix = prix;

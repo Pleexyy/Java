@@ -1,9 +1,7 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class Window extends JFrame implements ActionListener {
+public class Window extends JFrame {
 
 	/**
 	 * 
@@ -26,11 +24,5 @@ public class Window extends JFrame implements ActionListener {
 		this.getContentPane().add(pageConnexion);
 
 		this.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 }

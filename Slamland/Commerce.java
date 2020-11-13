@@ -1,14 +1,17 @@
 import java.util.ArrayList;
 
 public class Commerce {
+    /* attributs privés */
     private String nom;
     private ArrayList<Visiteur> lesConsommateurs;
 
+    /* constructeur */
     public Commerce(String nom, ArrayList<Visiteur> lesConsommateurs) {
         this.nom = nom;
         this.lesConsommateurs = lesConsommateurs;
     }
 
+    /* getter */
     public String getNom() {
         return this.nom;
     }

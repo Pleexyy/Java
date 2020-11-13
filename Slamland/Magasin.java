@@ -1,18 +1,22 @@
 import java.util.ArrayList;
 
 public class Magasin {
+    /* attributs privés */
     private String nom;
     private ArrayList<Article> lesArticles;
 
+    /* constructeur */
     public Magasin(ArrayList<Article> lesArticles) {
         this.lesArticles = lesArticles;
     }
 
+    /* constructeur */
     public Magasin(String nom, ArrayList<Article> lesArticles) {
         this.nom = nom;
         this.lesArticles = lesArticles;
     }
 
+    /* getter */
     public String getNom() {
         return this.nom;
     }

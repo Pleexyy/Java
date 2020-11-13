@@ -2,16 +2,19 @@ import java.util.ArrayList;
 
 public class Attraction {
 
+    /* attributs privés */
     private String nom, chaine;
     private int capaciteMax, duree;
     private ArrayList<Visiteur> lesVisiteurs;
 
+    /* constructeur */
     public Attraction(String nom, int capaciteMax, int duree) {
         this.nom = nom;
         this.capaciteMax = capaciteMax;
         this.duree = duree;
     }
 
+    /* constructeur */
     public Attraction(String nom, int capaciteMax, int duree, float prix, ArrayList<Visiteur> lesVisiteurs) {
         this.nom = nom;
         this.capaciteMax = capaciteMax;
@@ -19,15 +22,18 @@ public class Attraction {
         this.lesVisiteurs = lesVisiteurs;
     }
 
+    /* constructeur */
     public Attraction(String nom, ArrayList<Visiteur> lesVisiteurs) {
         this.nom = nom;
         this.lesVisiteurs = lesVisiteurs;
     }
 
+    /* constructeur */
     public Attraction(String nom) {
         this.nom = nom;
     }
 
+    /* getter */
     public String getNom() {
         return this.nom;
     }

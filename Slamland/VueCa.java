@@ -33,24 +33,24 @@ public class VueCa extends JPanel implements ActionListener {
         generate = new JLabel();
         generate.setText("Le chiffre d'affaires du parc choisi sera affiché dans la console.");
         generate.setBounds(150, 150, 100, 100);
-        	
-        textArea = new TextArea();  
-        textArea.setBounds(10,30, 300,300);
-        
+
+        textArea = new TextArea();
+        textArea.setBounds(10, 30, 300, 300);
+
         /* ajoute les éléments à notre JPanel */
         this.add(welcome);
         this.add(generate);
-        this.add(parcs);	
+        this.add(parcs);
         this.add(textArea);
         this.add(new JScrollPane(table));
 
     }
 
     public void setText(String ca) {
-    	textArea.setText(ca);
-    	textArea.setEditable(false);
+        textArea.setText(ca);
+        textArea.setEditable(false);
     }
-    
+
     public void actionPerformed(ActionEvent e) {
         this.frame.setContentPane(this);
         this.frame.revalidate();
@@ -60,8 +60,10 @@ public class VueCa extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 int index = parcs.getSelectedIndex();
                 Parc parc = listeParcs.get(index);
-//                System.out.println(parc.calculerCA());
-                setText(String.valueOf(parc.calculerCA()));
+                String nomParc = parcs.getSelectedItem().toString();
+                System.out.println(nomParc);
+                // System.out.println(parc.calculerCA());
+                setText(String.valueOf(parc.calculerCA(nomParc)));
             }
         });
 

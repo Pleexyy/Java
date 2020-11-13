@@ -66,7 +66,7 @@ public class VueAjouter extends JPanel implements ActionListener {
         ajouterButton.setForeground(Color.WHITE);
         ajouterButton.setFocusPainted(false);
         ajouterButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-        // ajouterButton.addActionListener(this);
+        ajouterButton.addActionListener(this);
 
         /* ajoute les éléments à notre panel */
         this.add(welcome);
@@ -88,12 +88,11 @@ public class VueAjouter extends JPanel implements ActionListener {
 
     /*
      * fonction qui affiche une boite de dialogue pour confirmer l'ajout d'un
-     * utilisateur
+     * visiteur
      */
     public void added() {
         JOptionPane.showMessageDialog(this, "Ajout réussi.");
         revalidate();
-        removeAll();
     }
 
     /*
@@ -116,9 +115,10 @@ public class VueAjouter extends JPanel implements ActionListener {
                 String valPrenom = prenom.getText();
                 String valNom = nom.getText();
                 String valDateNaissance = dateNaissance.getText();
-
-                System.out.println(valId + " " + valPrenom + " " + valNom + " " + valDateNaissance);
                 Database.ajouterVisiteur(valId, valNom, valPrenom, valDateNaissance);
+                /*
+                 * appelle la boite de dialogue en fonction du résultat renvoyé par la fonction
+                 */
                 if (Database.ajouterVisiteur(valId, valNom, valPrenom, valDateNaissance) == 1) {
                     added();
                 } else {
