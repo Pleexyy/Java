@@ -33,6 +33,12 @@ public class VueSuppression extends JPanel implements ActionListener {
         btnSupprimer.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnSupprimer.addActionListener(this);
 
+        remplirTable();
+
+        frame.setVisible(true);
+    }
+
+    public void remplirTable() {
         /* création des titres de notre JTable */
         Object[][] donnees = new Object[Database.getLesVisiteurs().size()][4];
 
@@ -50,7 +56,6 @@ public class VueSuppression extends JPanel implements ActionListener {
             donnees[i][3] = Database.getLesVisiteurs().get(i).getDateNaissance();
             tableModel.addRow(donnees[i]);
         }
-
         /* création du table + remplissage */
         table = new JTable(tableModel);
 
@@ -59,8 +64,6 @@ public class VueSuppression extends JPanel implements ActionListener {
 
         /* ajout du bouton supprimer au panel */
         this.add(btnSupprimer);
-
-        frame.setVisible(true);
     }
 
     /*
@@ -69,8 +72,10 @@ public class VueSuppression extends JPanel implements ActionListener {
      */
     public void removed() {
         JOptionPane.showMessageDialog(this, "Suppression réussie.");
+        removeAll();
+        remplirTable();
+        repaint();
         revalidate();
-
     }
 
     /*
@@ -79,6 +84,9 @@ public class VueSuppression extends JPanel implements ActionListener {
      */
     public void notRemoved() {
         JOptionPane.showMessageDialog(this, "Erreur.", "Erreur lors de la suppression", JOptionPane.WARNING_MESSAGE);
+        removeAll();
+        remplirTable();
+        repaint();
         revalidate();
     }
 

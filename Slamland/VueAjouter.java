@@ -115,6 +115,13 @@ public class VueAjouter extends JPanel implements ActionListener {
                 String valPrenom = prenom.getText();
                 String valNom = nom.getText();
                 String valDateNaissance = dateNaissance.getText();
+
+                /* vide les champs de texte une fois l'ajout effectué */
+                id.setText("");
+                prenom.setText("");
+                nom.setText("");
+                dateNaissance.setText("");
+
                 Database.ajouterVisiteur(valId, valNom, valPrenom, valDateNaissance);
                 /*
                  * appelle la boite de dialogue en fonction du résultat renvoyé par la fonction
