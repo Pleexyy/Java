@@ -1,5 +1,7 @@
 import javax.swing.*;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -10,13 +12,13 @@ public class VueSuppression extends JPanel implements ActionListener {
     private JFrame frame;
     private JTable table;
     private JButton btnSupprimer;
+    private DefaultTableModel tableModel;
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
     public VueSuppression(JFrame frame) {
-        JScrollPane scrollpane = null;
         this.frame = frame;
 
         /*
@@ -32,8 +34,13 @@ public class VueSuppression extends JPanel implements ActionListener {
         btnSupprimer.addActionListener(this);
 
         /* création des titres de notre JTable */
-        String[] entetes = { "id visiteur", "nom visiteur", "pr�nom visiteur", "date de naissance" };
         Object[][] donnees = new Object[Database.getLesVisiteurs().size()][4];
+
+        tableModel = new DefaultTableModel();
+        tableModel.addColumn("id visiteur");
+        tableModel.addColumn("nom visiteur");
+        tableModel.addColumn("pr�nom visiteur");
+        tableModel.addColumn("date de naissance");
 
         /* ajout à notre tableau à 2 dimensions des informations du visiteur */
         for (int i = 0; i < Database.getLesVisiteurs().size(); i++) {
@@ -41,13 +48,14 @@ public class VueSuppression extends JPanel implements ActionListener {
             donnees[i][1] = Database.getLesVisiteurs().get(i).getNom();
             donnees[i][2] = Database.getLesVisiteurs().get(i).getPrenom();
             donnees[i][3] = Database.getLesVisiteurs().get(i).getDateNaissance();
+            tableModel.addRow(donnees[i]);
         }
+
         /* création du table + remplissage */
-        table = new JTable(donnees, entetes);
+        table = new JTable(tableModel);
+
         /* ajout du tableau à un scrollpane */
-        scrollpane = new JScrollPane(table);
-        /* ajout du scrollpane au panel */
-        this.add(scrollpane);
+        this.add(new JScrollPane(table));
 
         /* ajout du bouton supprimer au panel */
         this.add(btnSupprimer);
