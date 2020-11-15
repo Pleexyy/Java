@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 13, 2020 at 07:20 PM
+-- Generation Time: Nov 15, 2020 at 10:36 AM
 -- Server version: 10.4.12-MariaDB
 -- PHP Version: 7.4.6
 
@@ -41,7 +41,8 @@ CREATE TABLE `acheter` (
 --
 
 INSERT INTO `acheter` (`idachat`, `idvisiteur`, `idcommerce`, `nomconsommateur`, `prenomconsommateur`, `dateachat`) VALUES
-(38, 24, 732, 'david', 'dupont', '15/06/2019');
+(38, 24, 732, 'david', 'dupont', '15/06/2019'),
+(39, 25, 548, 'martin', 'chane', '15/10/2019');
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,9 @@ CREATE TABLE `article` (
 --
 
 INSERT INTO `article` (`id`, `libelle`, `prix`) VALUES
-(89, 'peluche mickey', 19.99);
+(12, 'Figurine Star-Wars', 39.99),
+(89, 'peluche mickey', 19.99),
+(91, 'Ensemble LEGO 75192 Millenium Falcon Star Wars', 799.99);
 
 -- --------------------------------------------------------
 
@@ -186,7 +189,9 @@ CREATE TABLE `posseder` (
 --
 
 INSERT INTO `posseder` (`idarticle`, `idmagasin`, `libelle`, `prix`) VALUES
-(89, 548, 'peluche mickey', 19.99);
+(12, 548, 'Figurine Star-Wars', 39.99),
+(89, 548, 'peluche mickey', 19.99),
+(91, 548, 'Ensemble LEGO 75192 Millenium Falcon Star Wars', 799.99);
 
 -- --------------------------------------------------------
 
@@ -242,11 +247,9 @@ CREATE TABLE `visiteur` (
 --
 
 INSERT INTO `visiteur` (`id`, `nom`, `prenom`, `dateNaissance`) VALUES
-(3, 'pom', 'pom', '02/04/2000'),
 (7, 'ty', 'ty', '07/02/1967'),
 (24, 'david', 'dupont', '15/02/1985'),
-(25, 'martin', 'chane', '15/02/1999'),
-(732, 'vi', 'vi', '15/08/1997');
+(25, 'martin', 'chane', '15/02/1999');
 
 --
 -- Indexes for dumped tables
